@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const database = require("./database");
 
 // Explicit:
 // const BACKEND_PORT = parseInt(process.env.BACKEND_PORT ?? "5005", 10);
@@ -10,7 +11,20 @@ const BACKEND_PORT = process.env.BACKEND_PORT ?? 5005;
 const app = express();
 
 app.get("/", (req, res) => {
-  res.status(200).send("Welcome to our API!");
+  let output = "";
+  let error = false;
+  database.getConnection().then(() => {
+    output += "Database connection working well.\n";
+  }).catch((err) => {
+    console.error(err);
+    output += "Database connection malfunctioning.\n";
+  }).finally(() => {
+    if(error) {
+      res.status(500).send(output);
+    } else {
+      res.status(200).send("Welcome to our API!\n" + output);
+    }
+  });
 });
 
 app.listen(BACKEND_PORT, () => {
