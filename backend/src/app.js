@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
   database.getConnection().then(() => {
     output += "Database connection working well.\n";
   }).catch((err) => {
+    error = true; // We missed this in part 1
     console.error(err);
     output += "Database connection malfunctioning.\n";
   }).finally(() => {
