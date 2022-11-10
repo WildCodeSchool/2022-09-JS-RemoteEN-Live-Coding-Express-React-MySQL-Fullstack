@@ -9,5 +9,7 @@ movieRouter.post("/", movieHandlers.createMovie);
 
 // Routes related to a single entity in the collection
 movieRouter.get("/:id", movieHandlers.getMovieByID);
+movieRouter.put("/:id", movieHandlers.putMovie);
+movieRouter.patch("/:id", movieHandlers.patchMovie);
 
 module.exports = movieRouter;
