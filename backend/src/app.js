@@ -1,6 +1,8 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
+
 const database = require("./database");
 const movieRouter = require("./movies/movieRouter");
 
@@ -10,6 +12,7 @@ const movieRouter = require("./movies/movieRouter");
 const BACKEND_PORT = process.env.BACKEND_PORT ?? 5005;
 
 const app = express();
+app.use(cors());
 
 app.get("/", (req, res) => {
   let output = "";
