@@ -128,10 +128,28 @@ const patchMovie = (req, res) => {
     });
 };
 
+const deleteMovie = (req, res) => {
+  const movieID = req.params.id;
+  database
+    .query("DELETE FROM movies WHERE id = ?", [movieID])
+    .then((result) => {
+      if (result[0].affectedRows === 0) {
+        res.status(404).send("Movie not found.");
+      } else {
+        res.sendStatus(202);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Internal Server Error");
+    });
+};
+
 module.exports = {
   getAllMovies,
   getMovieByID,
   createMovie,
   putMovie,
   patchMovie,
+  deleteMovie,
 };

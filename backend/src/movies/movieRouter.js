@@ -11,5 +11,6 @@ movieRouter.post("/", movieHandlers.createMovie);
 movieRouter.get("/:id", movieHandlers.getMovieByID);
 movieRouter.put("/:id", movieHandlers.putMovie);
 movieRouter.patch("/:id", movieHandlers.patchMovie);
+movieRouter.delete("/:id", movieHandlers.deleteMovie);
 
 module.exports = movieRouter;
