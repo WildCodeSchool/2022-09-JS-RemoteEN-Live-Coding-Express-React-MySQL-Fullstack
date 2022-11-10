@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const database = require("./database");
+const movieRouter = require("./movies/movieRouter");
 
 // Explicit:
 // const BACKEND_PORT = parseInt(process.env.BACKEND_PORT ?? "5005", 10);
@@ -27,6 +28,8 @@ app.get("/", (req, res) => {
     }
   });
 });
+
+app.use("/movies", movieRouter);
 
 app.listen(BACKEND_PORT, () => {
   console.log("Listening on port", BACKEND_PORT);
