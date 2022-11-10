@@ -3,6 +3,11 @@ const movieHandlers = require("./movieHandlers");
 
 const movieRouter = express.Router();
 
-movieRouter.get("/", movieHandlers.getAllUsers);
+// Routes related to the whole collection
+movieRouter.get("/", movieHandlers.getAllMovies);
+movieRouter.post("/", movieHandlers.createMovie);
+
+// Routes related to a single entity in the collection
+movieRouter.get("/:id", movieHandlers.getMovieByID);
 
 module.exports = movieRouter;

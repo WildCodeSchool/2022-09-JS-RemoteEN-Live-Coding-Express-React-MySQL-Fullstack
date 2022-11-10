@@ -13,6 +13,7 @@ const BACKEND_PORT = process.env.BACKEND_PORT ?? 5005;
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   let output = "";
