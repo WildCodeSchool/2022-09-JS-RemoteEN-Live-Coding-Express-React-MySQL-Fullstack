@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const MovieList = ({ movies }) => {
+  // TODO: Display movies in table and filter by e.g. genre
   return (
     <ul>
       {movies.map((movie) => {

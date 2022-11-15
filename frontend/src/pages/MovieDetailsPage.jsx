@@ -1,19 +1,20 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import styles from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState(undefined);
 
   const { id } = useParams();
 
-  const backendURL = "http://localhost:5005";
+  const uri = `http://localhost:5005/movies/${id}`;
 
   useEffect(() => {
     const source = axios.CancelToken.source();
 
     axios
-      .get(`${backendURL}/movies/${id}`, { cancelToken: source.token })
+      .get(uri, { cancelToken: source.token })
       .then((response) => response.data)
       .then((data) => setMovie(data[0]));
 
@@ -22,13 +23,51 @@ const MovieDetailsPage = () => {
     };
   }, []);
 
-  console.log(movie);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(uri, movie)
+      .then((response) => response.data)
+      .then((data) => console.log(data));
+  };
 
   return (
-    <div>
-      {movie.title}
+    <div className={styles.movieContainer}>
+      {movie != null && (
+        <form onSubmit={handleSubmit}>
+          <input
+            value={movie.title}
+            onChange={(e) =>
+              setMovie({ ...movie, ...{ title: e.target.value } })
+            }
+            type="text"
+          />
+          <input
+            value={movie.genre}
+            onChange={(e) =>
+              setMovie({ ...movie, ...{ genre: e.target.value } })
+            }
+            type="text"
+          />
+          <input
+            value={movie.year}
+            onChange={(e) =>
+              setMovie({ ...movie, ...{ year: e.target.value } })
+            }
+            type="text"
+          />
+          <input
+            value={movie.rate}
+            onChange={(e) =>
+              setMovie({ ...movie, ...{ rate: e.target.value } })
+            }
+            type="text"
+          />
+          <button type="submit">Save changes</button>
+        </form>
+      )}
     </div>
   );
-}
+};
 
 export default MovieDetailsPage;
