@@ -1,30 +1,22 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
-import MovieList from "./components/MovieList";
+import { Link, Route, Routes } from "react-router-dom";
+import MovieListPage from "./pages/MovieListPage";
+import MovieDetailsPage from "./pages/MovieDetailsPage";
+import AppStyles from "./App.module.css";
 
 function App() {
-  const [movies, setMovies] = useState([]);
-
-  const backendURL = "http://localhost:5005";
-
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-
-    axios
-      .get(`${backendURL}/movies`, { cancelToken: source.token })
-      .then((response) => response.data)
-      .then((data) => setMovies(data));
-
-    return () => {
-      source.cancel("Component got unmounted");
-    };
-  }, []);
-
   return (
-    <div className="App">
-      <MovieList movies={movies} />
+    <div>
+      <nav className={AppStyles.nav}>
+        <ul>
+          <li>
+            <Link to="/">All Movies</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<MovieListPage />} />
+        <Route path="/:id" element={<MovieDetailsPage />} />
+      </Routes>
     </div>
   );
 }
