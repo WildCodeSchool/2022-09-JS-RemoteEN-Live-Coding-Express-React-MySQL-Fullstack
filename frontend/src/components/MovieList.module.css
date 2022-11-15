@@ -1,0 +1,12 @@
+.table {
+  background-color: #00000008;
+  width: 100%;
+}
+
+.table thead {
+  background-color: #00000012;
+}
+
+.table td {
+  padding: .25rem;
+}
