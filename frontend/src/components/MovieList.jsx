@@ -62,6 +62,7 @@ const MovieList = ({ movies }) => {
             keepMovie &&= movie.genre
               .toLowerCase()
               .includes(filterGenre.toLowerCase());
+            // keepMovie &&= movie.year === filterYear;
             return keepMovie;
           })
           .map((movie) => {
