@@ -51,29 +51,25 @@ const MovieDetailsPage = () => {
             <input
               value={movie.title}
               onChange={(e) =>
-                setMovie({ ...movie, ...{ title: e.target.value } })
+                // TODO: explain why I changed this to be more understandable:
+                // setMovie({ ...movie, ...{ title: e.target.value } })
+                setMovie({ ...movie, title: e.target.value })
               }
               type="text"
             />
             <input
               value={movie.genre}
-              onChange={(e) =>
-                setMovie({ ...movie, ...{ genre: e.target.value } })
-              }
+              onChange={(e) => setMovie({ ...movie, genre: e.target.value })}
               type="text"
             />
             <input
               value={movie.year}
-              onChange={(e) =>
-                setMovie({ ...movie, ...{ year: e.target.value } })
-              }
+              onChange={(e) => setMovie({ ...movie, year: e.target.value })}
               type="text"
             />
             <input
               value={movie.rate}
-              onChange={(e) =>
-                setMovie({ ...movie, ...{ rate: e.target.value } })
-              }
+              onChange={(e) => setMovie({ ...movie, rate: e.target.value })}
               type="text"
             />
             <button type="submit">Save changes</button>
